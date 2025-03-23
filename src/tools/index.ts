@@ -7,6 +7,17 @@ import { spatialToolDefinitions, handleSpatialTools } from "./spatialTools.js";
 import { boardToolDefinitions, handleBoardTools } from "./boardTools.js";
 import { contentToolDefinitions, handleContentTools } from "./contentTools.js";
 
+// Export all tool definitions and handlers
+export {
+  imageToolDefinitions, handleImageTools,
+  embedToolDefinitions, handleEmbedTools,
+  screenshotToolDefinitions, handleScreenshotTools,
+  shapeToolDefinitions, handleShapeTools,
+  spatialToolDefinitions, handleSpatialTools,
+  boardToolDefinitions, handleBoardTools,
+  contentToolDefinitions, handleContentTools
+};
+
 /**
  * Get all tool definitions from the various tools modules
  */

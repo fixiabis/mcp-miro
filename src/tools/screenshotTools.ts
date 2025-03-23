@@ -7,7 +7,7 @@ export const screenshotToolDefinitions = [
   {
     name: 'export_board_as_json',
     description: 'Export the board data in JSON format. Note: Miro does not provide a direct screenshot API. For visual exports, use get_frame_spatial_map from spatial tools which provides SVG visualization with coordinate system.',
-    input_schema: {
+    inputSchema: {
       type: 'object',
       properties: {
         boardId: {
