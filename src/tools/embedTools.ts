@@ -6,7 +6,7 @@ import { MiroClient } from "../MiroClient.js";
 export const embedToolDefinitions = [
   {
     name: "create_embed",
-    description: "Create an embed (iframe) on a Miro board from a URL. Supports websites, YouTube videos, etc.",
+    description: "Create an embed (iframe) on a Miro board from a URL. Supports websites, YouTube videos, speckel  etc.",
     input_schema: {
       type: "object",
       properties: {
