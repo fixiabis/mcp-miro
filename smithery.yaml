@@ -1,0 +1,15 @@
+startCommand:
+  type: stdio
+  configSchema:
+    type: object
+    properties:
+      miroToken:
+        type: string
+        description: "Miro OAuth token for accessing Miro API"
+        secret: true
+    required: ["miroToken"]
+  commandFunction: |
+    (config) => ({
+      command: "node", 
+      args: ["build/index.js", "--token", config.miroToken]
+    }) 

@@ -78,7 +78,7 @@ export class MiroClient {
     boardId: string,
     content: string,
     position: MiroPosition = { x: 0, y: 0 }
-  ) {
+  ): Promise<MiroItem> {
     return this.fetchApi(`/boards/${boardId}/sticky_notes`, {
       method: 'POST',
       body: {
@@ -94,13 +94,13 @@ export class MiroClient {
       type: string;
       [key: string]: any;
     }>
-  ) {
+  ): Promise<any> {
     return this.fetchApi(`/boards/${boardId}/bulk_create_item`, {
       method: 'POST',
       body: {
         items
       }
-    }) as Promise<MiroItem>;
+    }) as Promise<any>;
   }
 
   async getFrames(boardId: string): Promise<MiroItem[]> {
@@ -133,7 +133,7 @@ export class MiroClient {
     imageUrl: string,
     position?: { x: number; y: number; origin?: string },
     geometry?: { width?: number; height?: number }
-  ) {
+  ): Promise<MiroItem> {
     const response = await fetch(`${this.baseUrl}/boards/${boardId}/images`, {
       method: 'POST',
       headers: {
@@ -154,7 +154,7 @@ export class MiroClient {
       throw new Error(`Failed to create image by URL: ${response.status} ${response.statusText} - ${errorText}`);
     }
 
-    return await response.json();
+    return await response.json() as MiroItem;
   }
 
   /**
@@ -170,7 +170,7 @@ export class MiroClient {
     base64Data: string,
     position?: { x: number; y: number; origin?: string },
     geometry?: { width?: number; height?: number }
-  ) {
+  ): Promise<MiroItem> {
     try {
       // Make sure base64Data is properly formatted - strip header if present
       let imageData = base64Data;
@@ -204,7 +204,7 @@ export class MiroClient {
     file: Buffer,
     position?: { x: number; y: number; origin?: string },
     geometry?: { width?: number; height?: number }
-  ) {
+  ): Promise<MiroItem> {
     try {
       const formData = new FormData();
       
@@ -234,7 +234,7 @@ export class MiroClient {
         throw new Error(`Failed to create image from file: ${response.status} ${response.statusText} - ${errorText}`);
       }
 
-      return await response.json();
+      return await response.json() as MiroItem;
     } catch (error: unknown) {
       if (error instanceof Error) {
         throw new Error(`Failed to create image from file: ${error.message}`);
@@ -254,46 +254,19 @@ export class MiroClient {
    * @returns The created embed item
    */
   async createEmbed(
-    boardId: string, 
+    boardId: string,
     url: string,
-    position?: { x: number; y: number; origin?: string },
-    geometry?: { width?: number; height?: number },
-    mode?: 'inline' | 'modal',
-    previewUrl?: string
-  ) {
-    try {
-      const embedData: any = {
-        url
-      };
-      
-      if (mode) embedData.mode = mode;
-      if (previewUrl) embedData.previewUrl = previewUrl;
-      
-      const response = await fetch(`${this.baseUrl}/boards/${boardId}/embeds`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${this.miroToken}`
-        },
-        body: JSON.stringify({
-          data: embedData,
-          position: position || undefined,
-          geometry: geometry || undefined
-        })
-      });
-
-      if (!response.ok) {
-        const errorText = await response.text();
-        throw new Error(`Failed to create embed: ${response.status} ${response.statusText} - ${errorText}`);
+    position?: MiroPosition,
+    geometry?: MiroGeometry
+  ): Promise<MiroItem> {
+    return this.fetchApi(`/boards/${boardId}/embeds`, {
+      method: 'POST',
+      body: {
+        data: { url },
+        position: position || undefined,
+        geometry: geometry || undefined
       }
-
-      return await response.json();
-    } catch (error: unknown) {
-      if (error instanceof Error) {
-        throw new Error(`Failed to create embed: ${error.message}`);
-      }
-      throw new Error('Failed to create embed: Unknown error');
-    }
+    }) as Promise<MiroItem>;
   }
 
   /**
@@ -301,29 +274,31 @@ export class MiroClient {
    * @param boardId The ID of the board to get items from
    * @returns Array of all items on the board
    */
-  async getAllItems(boardId: string) {
-    try {
-      const response = await fetch(`${this.baseUrl}/boards/${boardId}/items`, {
-        method: 'GET',
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${this.miroToken}`
-        }
-      });
-
-      if (!response.ok) {
-        const errorText = await response.text();
-        throw new Error(`Failed to get all items: ${response.status} ${response.statusText} - ${errorText}`);
+  async getAllItems(boardId: string): Promise<MiroItem[]> {
+    // Start with an empty array to collect all items
+    let allItems: MiroItem[] = [];
+    let cursor: string | undefined;
+    
+    do {
+      // Build the URL with cursor if available
+      let url = `/boards/${boardId}/items?limit=50`;
+      if (cursor) {
+        url += `&cursor=${cursor}`;
       }
-
-      const result = await response.json();
-      return result.data || [];
-    } catch (error: unknown) {
-      if (error instanceof Error) {
-        throw new Error(`Failed to get all items: ${error.message}`);
-      }
-      throw new Error('Failed to get all items: Unknown error');
-    }
+      
+      // Fetch the next page of items
+      const response = await this.fetchApi(url) as MiroItemsResponse;
+      
+      // Add the items to our collection
+      allItems = [...allItems, ...response.data];
+      
+      // Update the cursor for the next page
+      cursor = response.cursor;
+      
+      // Continue until there is no more cursor
+    } while (cursor);
+    
+    return allItems;
   }
 
   /**
@@ -332,27 +307,7 @@ export class MiroClient {
    * @param itemId The ID of the item to retrieve
    * @returns The requested item
    */
-  async getItem(boardId: string, itemId: string) {
-    try {
-      const response = await fetch(`${this.baseUrl}/boards/${boardId}/items/${itemId}`, {
-        method: 'GET',
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${this.miroToken}`
-        }
-      });
-
-      if (!response.ok) {
-        const errorText = await response.text();
-        throw new Error(`Failed to get item: ${response.status} ${response.statusText} - ${errorText}`);
-      }
-
-      return await response.json();
-    } catch (error: unknown) {
-      if (error instanceof Error) {
-        throw new Error(`Failed to get item: ${error.message}`);
-      }
-      throw new Error('Failed to get item: Unknown error');
-    }
+  async getItem(boardId: string, itemId: string): Promise<MiroItem> {
+    return this.fetchApi(`/boards/${boardId}/items/${itemId}`) as Promise<MiroItem>;
   }
 }

@@ -1,4 +1,4 @@
-import { MiroClient } from "../MiroClient.js";
+import { MiroClient, MiroItem } from "../MiroClient.js";
 
 /**
  * Tool definitions for iframe embedding
@@ -7,7 +7,7 @@ export const embedToolDefinitions = [
   {
     name: "create_embed",
     description: "Create an embed (iframe) on a Miro board from a URL. Supports websites, YouTube videos, speckel  etc.",
-    input_schema: {
+    inputSchema: {
       type: "object",
       properties: {
         boardId: {
@@ -95,9 +95,7 @@ export const handleEmbedTools = async (toolName: string, args: any, miroClient: 
         boardId,
         url,
         { x, y, origin },
-        Object.keys(geometry).length > 0 ? geometry : undefined,
-        mode as 'inline' | 'modal',
-        previewUrl
+        Object.keys(geometry).length > 0 ? geometry : undefined
       );
 
       return {

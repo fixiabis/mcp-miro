@@ -7,7 +7,7 @@ export const spatialToolDefinitions = [
   {
     name: 'get_frame_spatial_map',
     description: 'Get an SVG representation of a frame with coordinate system for spatial awareness. This tool provides detailed visualization of frame contents including shapes, images, and text with precise coordinates. Can be used for visual exports, spatial analysis, and understanding object placement.',
-    input_schema: {
+    inputSchema: {
       type: 'object',
       properties: {
         boardId: {

@@ -7,7 +7,7 @@ export const shapeToolDefinitions = [
   {
     name: 'get_shape_details',
     description: 'Get detailed information about a shape including coordinates and style',
-    input_schema: {
+    inputSchema: {
       type: 'object',
       properties: {
         boardId: {
@@ -21,7 +21,7 @@ export const shapeToolDefinitions = [
       },
       required: ['boardId', 'shapeId'],
     },
-    output_schema: {
+    outputSchema: {
       type: 'object',
       properties: {
         id: {
@@ -66,7 +66,7 @@ export const shapeToolDefinitions = [
   {
     name: 'get_shapes_by_type',
     description: 'Get all shapes of a specific type on a board',
-    input_schema: {
+    inputSchema: {
       type: 'object',
       properties: {
         boardId: {
@@ -80,7 +80,7 @@ export const shapeToolDefinitions = [
       },
       required: ['boardId', 'shapeType'],
     },
-    output_schema: {
+    outputSchema: {
       type: 'object',
       properties: {
         shapes: {
