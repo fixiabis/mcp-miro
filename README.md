@@ -1,95 +1,169 @@
-# mcp-miro MCP Server
-[![smithery badge](https://smithery.ai/badge/@llmindset/mcp-miro)](https://smithery.ai/server/@llmindset/mcp-miro)
+# Miro Extension for Model Context Protocol (MCP)
 
-A Model Context Protocol server to connect to the MIRO Whiteboard Application.
+## Overview
 
-- Allows Board manipulation, sticky creation, bulk operations and more.
-- Pass your OAuth key as an Environment Variable, or using the "--token" argument.
-- Taking a photo of stickies and asking Claude to create MIRO equivalent works _really_ well.
-
-<a href="https://glama.ai/mcp/servers/gr5t7vthv3"><img width="380" height="200" src="https://glama.ai/mcp/servers/gr5t7vthv3/badge" alt="mcp-miro MCP server" /></a>
-
-## Installation
-
-### Installing via Smithery
-
-To install MIRO Whiteboard Connector for Claude Desktop automatically via [Smithery](https://smithery.ai/server/@llmindset/mcp-miro):
-
-```bash
-npx -y @smithery/cli install @llmindset/mcp-miro --client claude
-```
-
-### Using mcp-get
-
-You can install this package using mcp-get:
-
-```bash
-npx @michaellatman/mcp-get@latest install @llmindset/mcp-miro
-```
-
-_Note - if you are using an old version of Windows PowerShell, you may need to run_ `Set-ExecutionPolicy Bypass -Scope Process` _before this command._
+This extension enables AI agents to interact with Miro boards through the Model Context Protocol (MCP). It provides advanced capabilities for manipulating and extracting data from Miro boards, making it a powerful tool for AI-assisted design, collaboration, and data visualization.
 
 ## Features
 
-![MIRO/Claude Desktop Screenshot](./2024-12-02-screenshot_1.png)
+### Image Tools
+- Create images on Miro boards using URLs
+- Upload images using base64-encoded data
+- Support for positioning and sizing
 
-### Resources
-- Get Board Contents 
+### Iframe Embedding
+- Embed iframes into Miro boards (websites, videos, etc.)
+- Control display mode (inline/modal)
+- Set preview images for embedded content
 
-### Tools
-- Create Sticky, Shape
-- Read Board, Frame, Contents
-- Bulk Create
+### Board Data Export
+- Export entire board data in JSON format
+- Get detailed information about board items
+- View comprehensive board structure and content
 
-### Prompts
-- Instruct on Board Coordinates etc.
-
-## Development
-
-Install dependencies:
-```bash
-npm install
-```
-
-Build the server:
-```bash
-npm run build
-```
-
-For development with auto-rebuild:
-```bash
-npm run watch
-```
+### Shape Data Extraction
+- Get detailed information about specific shapes
+- Extract positions, dimensions, and styles
+- Query shapes by type across a board
 
 ## Installation
 
-To use with Claude Desktop, add the server config:
+```bash
+# Clone the repository
+git clone <repository-url>
 
-On MacOS: `~/Library/Application Support/Claude/claude_desktop_config.json`
-On Windows: `%APPDATA%/Claude/claude_desktop_config.json`
+# Install dependencies
+npm install
+```
+
+## Authentication
+
+The extension requires a Miro OAuth token to function. You can provide this token when running the server:
+
+```bash
+npm start -- --miro-token YOUR_TOKEN_HERE
+```
+
+## Tools
+
+### Image Tools
+
+#### `create_image_from_url`
+Create an image on a Miro board from a URL.
 
 ```json
 {
-  "mcpServers": {
-    "mcp-miro": {
-      "command": "/path/to/node-or-npx",
-      "arguments": [
-        "/path/to/mcp-miro/build/index.js",
-        "--token","MIRO-OAUTH-KEY"
-      ]
-    }
-  }
+  "boardId": "board_id_here",
+  "imageUrl": "https://example.com/image.png",
+  "x": 0,
+  "y": 0,
+  "width": 300,
+  "height": 200
 }
 ```
 
-### Debugging
+#### `create_image_from_base64`
+Create an image on a Miro board from base64-encoded data.
 
-Since MCP servers communicate over stdio, debugging can be challenging. We recommend using the [MCP Inspector](https://github.com/modelcontextprotocol/inspector), which is available as a package script:
-
-```bash
-npm run inspector
+```json
+{
+  "boardId": "board_id_here",
+  "base64Data": "base64_string_here",
+  "x": 0,
+  "y": 0,
+  "width": 300,
+  "height": 200
+}
 ```
 
-The Inspector will provide a URL to access debugging tools in your browser.
+### Iframe Embedding
 
-In Dev environment recommend adding https://github.com/miroapp/api-clients/blob/041de24ebf7955432b447d887ede066ad4c7e2c7/packages/generator/spec.json for reference.
+#### `create_embed`
+Embed an iframe on a Miro board.
+
+```json
+{
+  "boardId": "board_id_here",
+  "url": "https://example.com",
+  "x": 0,
+  "y": 0,
+  "width": 600,
+  "mode": "inline",
+  "previewUrl": "https://example.com/preview.png"
+}
+```
+
+### Board Data Export
+
+#### `export_board_as_json`
+Export all data from a Miro board in JSON format.
+
+```json
+{
+  "boardId": "board_id_here"
+}
+```
+
+#### `get_shape_data`
+Get detailed data for a specific item on a board.
+
+```json
+{
+  "boardId": "board_id_here",
+  "itemId": "item_id_here"
+}
+```
+
+### Shape Data Extraction
+
+#### `get_shape_details`
+Get detailed information about a specific shape.
+
+```json
+{
+  "boardId": "board_id_here",
+  "shapeId": "shape_id_here"
+}
+```
+
+#### `get_shapes_by_type`
+Get all shapes of a specific type on a board.
+
+```json
+{
+  "boardId": "board_id_here",
+  "shapeType": "circle"
+}
+```
+
+## Architecture
+
+The extension follows a modular design with the following components:
+
+- `MiroClient.ts`: Core client for interacting with the Miro API
+- Tool modules in the `src/tools` directory:
+  - `imageTools.ts`: Image creation tools
+  - `embedTools.ts`: Iframe embedding tools
+  - `screenshotTools.ts`: Board data export tools
+  - `shapeTools.ts`: Shape data extraction tools
+- `index.ts`: Main entry point that handles MCP requests
+
+## Development
+
+To contribute to this project:
+
+1. Fork the repository
+2. Create a feature branch
+3. Make your changes
+4. Add tests for your changes
+5. Submit a pull request
+
+## License
+
+[MIT License](LICENSE)
+
+## Notes
+
+- This extension works around some limitations of the Miro API (e.g., no direct screenshot API) by providing comprehensive data that can be used to recreate or visualize boards.
+- All API calls include robust error handling and response validation.
+- The codebase is fully typed with TypeScript for better development experience and code quality.

@@ -15,6 +15,7 @@ import {
 } from "@modelcontextprotocol/sdk/types.js";
 import fs from 'fs/promises';
 import path from 'path';
+import { getAllToolDefinitions, handleToolRequest } from "./tools/index.js";
 
 // Parse command line arguments
 const argv = await yargs(hideBin(process.argv))
@@ -88,8 +89,10 @@ server.setRequestHandler(ReadResourceRequestSchema, async (request) => {
 });
 
 server.setRequestHandler(ListToolsRequestSchema, async () => {
+  // Combine the existing tools with our new modular tools
   return {
     tools: [
+      // Existing tools
       {
         name: "list_boards",
         description: "List all available Miro boards and their IDs",
@@ -361,11 +364,38 @@ server.setRequestHandler(ListToolsRequestSchema, async () => {
           required: ["boardId", "shape"],
         },
       },
+      // Add our new tools
+      ...getAllToolDefinitions(),
     ],
   };
 });
 
 server.setRequestHandler(CallToolRequestSchema, async (request) => {
+  // Check if the tool is one of our new modular tools
+  const toolName = request.params.name;
+  
+  // Lists of tool names to check for
+  const imageTools = ["create_image", "get_image"];
+  const embedTools = ["create_embed"];
+  const screenshotTools = ["export_board_as_json"];
+  const shapeTools = ["get_shape_details", "get_shapes_by_type"];
+  const spatialTools = ["get_frame_spatial_map"];
+  
+  // Check if the requested tool is one of our new tools
+  const isModularTool = [
+    ...imageTools,
+    ...embedTools,
+    ...screenshotTools,
+    ...shapeTools,
+    ...spatialTools
+  ].includes(toolName);
+  
+  // If it's one of our new tools, use the modular handler
+  if (isModularTool) {
+    return handleToolRequest(toolName, request.params.arguments, miroClient);
+  }
+  
+  // Handle existing tools
   switch (request.params.name) {
     case "list_boards": {
       const boards = await miroClient.getBoards();
@@ -392,18 +422,11 @@ server.setRequestHandler(CallToolRequestSchema, async (request) => {
         y = 0,
       } = request.params.arguments as any;
 
-      const stickyNote = await miroClient.createStickyNote(boardId, {
-        data: {
-          content: content,
-        },
-        style: {
-          fillColor: color,
-        },
-        position: {
-          x: x,
-          y: y,
-        },
-      });
+      const stickyNote = await miroClient.createStickyNote(
+        boardId,
+        content,
+        { x, y }
+      );
 
       return {
         content: [

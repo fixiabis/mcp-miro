@@ -1,0 +1,316 @@
+Name,URL
+Jump to Content,https://developers.miro.com/reference/overview#content
+Introduction,https://developers.miro.com/reference/overview
+Permission scopes,https://developers.miro.com/reference/scopes
+Rate limiting,https://developers.miro.com/reference/rate-limiting
+Authorization flow for expiring tokens,https://developers.miro.com/reference/authorization-flow-for-expiring-tokens
+Step 1: Create authorization request link,https://developers.miro.com/reference/create-authorization-request-link
+Step 2: Request user for authorization,https://developers.miro.com/reference/request-user-for-authorization
+Step 3: Exchange authorization code with access tokenpost,https://developers.miro.com/reference/exchange-authorization-code-with-access-token
+Step 4: Use access token for REST API requests,https://developers.miro.com/reference/use-access-token-for-rest-api-requests
+Step 5: Get new access token using refresh token,https://developers.miro.com/reference/get-new-access-token-using-refresh-token
+Authorization flow for non-expiring access tokens,https://developers.miro.com/reference/authorization-flow-for-expiring-access-tokens
+Step 1: Create authorization request link,https://developers.miro.com/reference/ne-create-authorization-request-link
+Step 2: Request the user for authorization,https://developers.miro.com/reference/ne-request-user-for-authorization
+Step 3: Exchange authorization code with access tokenpost,https://developers.miro.com/reference/ne-exchange-authorization-code-with-access-token
+Step 4: Use access token for REST API requests,https://developers.miro.com/reference/ne-use-access-token-for-rest-api-requests
+Revoke token (v2)post,https://developers.miro.com/reference/revoke-token-v2
+Get access token contextget,https://developers.miro.com/reference/get-access-token-context
+Revoke tokenpost,https://developers.miro.com/reference/revoke-token
+Create boardpost,https://developers.miro.com/reference/create-board
+Get boardsget,https://developers.miro.com/reference/get-boards
+Copy boardput,https://developers.miro.com/reference/copy-board
+Get specific boardget,https://developers.miro.com/reference/get-specific-board
+Update boardpatch,https://developers.miro.com/reference/update-board
+Delete boarddelete,https://developers.miro.com/reference/delete-board
+Share boardpost,https://developers.miro.com/reference/share-board
+Get all board membersget,https://developers.miro.com/reference/get-board-members
+Get specific board memberget,https://developers.miro.com/reference/get-specific-board-member
+Update board memberpatch,https://developers.miro.com/reference/update-board-member
+Remove board memberdelete,https://developers.miro.com/reference/remove-board-member
+Get items on boardget,https://developers.miro.com/reference/get-items
+Get specific item on boardget,https://developers.miro.com/reference/get-specific-item
+Update item position or parentpatch,https://developers.miro.com/reference/update-item-position-or-parent
+Delete itemdelete,https://developers.miro.com/reference/delete-item
+Create app card itempost,https://developers.miro.com/reference/create-app-card-item
+Get app card itemget,https://developers.miro.com/reference/get-app-card-item
+Update app card itempatch,https://developers.miro.com/reference/update-app-card-item
+Delete app card itemdelete,https://developers.miro.com/reference/delete-app-card-item
+Create card itempost,https://developers.miro.com/reference/create-card-item
+Get card itemget,https://developers.miro.com/reference/get-card-item
+Update card itempatch,https://developers.miro.com/reference/update-card-item
+Delete card itemdelete,https://developers.miro.com/reference/delete-card-item
+Create connectorpost,https://developers.miro.com/reference/create-connector
+Get connectorsget,https://developers.miro.com/reference/get-connectors
+Get specific connectorget,https://developers.miro.com/reference/get-connector
+Update connectorpatch,https://developers.miro.com/reference/update-connector
+Delete connectordelete,https://developers.miro.com/reference/delete-connector
+Create document item using URLpost,https://developers.miro.com/reference/create-document-item-using-url
+Create document item using file from devicepost,https://developers.miro.com/reference/create-document-item-using-file-from-device
+Get document itemget,https://developers.miro.com/reference/get-document-item
+Update document item using file from devicepatch,https://developers.miro.com/reference/update-document-item-using-file-from-device
+Update document item using URLpatch,https://developers.miro.com/reference/update-document-item-using-url
+Delete document itemdelete,https://developers.miro.com/reference/delete-document-item
+Create embed itempost,https://developers.miro.com/reference/create-embed-item
+Get embed itemget,https://developers.miro.com/reference/get-embed-item
+Update embed itempatch,https://developers.miro.com/reference/update-embed-item
+Delete embed itemdelete,https://developers.miro.com/reference/delete-embed-item
+Create framepost,https://developers.miro.com/reference/create-frame-item
+Get items within frameget,https://developers.miro.com/reference/get-items-within-frame
+Get frameget,https://developers.miro.com/reference/get-frame-item
+Update framepatch,https://developers.miro.com/reference/update-frame-item
+Delete framedelete,https://developers.miro.com/reference/delete-frame-item
+Create image item using URLpost,https://developers.miro.com/reference/create-image-item-using-url
+Create image item using file from devicepost,https://developers.miro.com/reference/create-image-item-using-local-file
+Get image itemget,https://developers.miro.com/reference/get-image-item
+Update image item using file from devicepatch,https://developers.miro.com/reference/update-image-item-using-file-from-device
+Update image item using URLpatch,https://developers.miro.com/reference/update-image-item-using-url
+Delete image itemdelete,https://developers.miro.com/reference/delete-image-item
+Create shape itempost,https://developers.miro.com/reference/create-shape-item
+Get shape itemget,https://developers.miro.com/reference/get-shape-item
+Update shape itempatch,https://developers.miro.com/reference/update-shape-item
+Delete shape itemdelete,https://developers.miro.com/reference/delete-shape-item
+Create sticky note itempost,https://developers.miro.com/reference/create-sticky-note-item
+Get sticky note itemget,https://developers.miro.com/reference/get-sticky-note-item
+Update sticky note itempatch,https://developers.miro.com/reference/update-sticky-note-item
+Delete sticky note itemdelete,https://developers.miro.com/reference/delete-sticky-note-item
+Create text itempost,https://developers.miro.com/reference/create-text-item
+Get text itemget,https://developers.miro.com/reference/get-text-item
+Update text itempatch,https://developers.miro.com/reference/update-text-item
+Delete text itemdelete,https://developers.miro.com/reference/delete-text-item
+Create grouppost,https://developers.miro.com/reference/creategroup
+Get all groups on a boardget,https://developers.miro.com/reference/get-all-groups
+Get items of a group by IDget,https://developers.miro.com/reference/getitemsbygroupid
+Get a group by its IDget,https://developers.miro.com/reference/getgroupbyid
+Ungroup itemsdelete,https://developers.miro.com/reference/ungroup
+Updates a group with new itemsput,https://developers.miro.com/reference/updategroup
+Deletes the groupdelete,https://developers.miro.com/reference/deletegroup
+Create items in bulk using file from devicepost,https://developers.miro.com/reference/create-items-in-bulk-using-file-from-device
+JSON file example,https://developers.miro.com/reference/json-data-example
+Create items in bulkpost,https://developers.miro.com/reference/create-items
+Get items by tagget,https://developers.miro.com/reference/get-items-by-tag
+Attach tag to itempost,https://developers.miro.com/reference/attach-tag-to-item
+Remove tag from itemdelete,https://developers.miro.com/reference/remove-tag-from-item
+Get tags from itemget,https://developers.miro.com/reference/get-tags-from-item
+Create tagpost,https://developers.miro.com/reference/create-tag
+Get tags from boardget,https://developers.miro.com/reference/get-tags-from-board
+Get tagget,https://developers.miro.com/reference/get-tag
+Update tagpatch,https://developers.miro.com/reference/update-tag
+Delete tagdelete,https://developers.miro.com/reference/delete-tag
+Get oEmbed dataget,https://developers.miro.com/reference/getembeddata
+App metrics (experimental),https://developers.miro.com/reference/get-metrics
+Get app metricsget,https://developers.miro.com/reference/get-metrics
+Get total app metricsget,https://developers.miro.com/reference/get-metrics-total
+Webhooks (experimental),https://developers.miro.com/reference/create-board-subscription
+Create webhook subscriptionpost,https://developers.miro.com/reference/create-board-subscription
+Update webhook subscriptionpatch,https://developers.miro.com/reference/update-board-subscription
+Get webhook subscriptionsget,https://developers.miro.com/reference/get-user-subscriptions
+Get specific webhook subscriptionget,https://developers.miro.com/reference/get-subscription-by-id
+Delete webhook subscriptiondelete,https://developers.miro.com/reference/delete-subscription-by-id
+Mind map nodes (experimental),https://developers.miro.com/reference/get-mindmap-node-experimental
+Get specific mind map nodeget,https://developers.miro.com/reference/get-mindmap-node-experimental
+Delete mind map nodedelete,https://developers.miro.com/reference/delete-mindmap-node-experimental
+Get mind map nodesget,https://developers.miro.com/reference/get-mindmap-nodes-experimental
+Create mind map nodepost,https://developers.miro.com/reference/create-mindmap-nodes-experimental
+Flowchart shapes (experimental),https://developers.miro.com/reference/get-items-experimental
+Get items on boardget,https://developers.miro.com/reference/get-items-experimental
+Get specific item on boardget,https://developers.miro.com/reference/get-specific-item-experimental
+Create shape itempost,https://developers.miro.com/reference/create-shape-item-flowchart
+Get shape itemget,https://developers.miro.com/reference/get-shape-item-flowchart
+Update shape itempatch,https://developers.miro.com/reference/update-shape-item-flowchart
+Delete shape itemdelete,https://developers.miro.com/reference/delete-shape-item-flowchart
+Projects,https://developers.miro.com/reference/enterprise-create-project
+Create projectpost,https://developers.miro.com/reference/enterprise-create-project
+List of projectsget,https://developers.miro.com/reference/enterprise-get-projects
+Get projectget,https://developers.miro.com/reference/enterprise-get-project
+Update projectpatch,https://developers.miro.com/reference/enterprise-update-project
+Delete projectdelete,https://developers.miro.com/reference/enterprise-delete-project
+Project Settings,https://developers.miro.com/reference/enterprise-get-project-settings
+Get project settingsget,https://developers.miro.com/reference/enterprise-get-project-settings
+Update project settingspatch,https://developers.miro.com/reference/enterprise-update-project-settings
+Project Members,https://developers.miro.com/reference/enterprise-add-project-member
+Add member in a projectpost,https://developers.miro.com/reference/enterprise-add-project-member
+List of project membersget,https://developers.miro.com/reference/enterprise-get-project-members
+Get project memberget,https://developers.miro.com/reference/enterprise-get-project-member
+Update project memberpatch,https://developers.miro.com/reference/enterprise-update-project-member
+Remove project memberdelete,https://developers.miro.com/reference/enterprise-delete-project-member
+Organizations,https://developers.miro.com/reference/enterprise-get-organization
+Get organization infoget,https://developers.miro.com/reference/enterprise-get-organization
+Organization Members,https://developers.miro.com/reference/enterprise-get-organization-members
+Get organization membersget,https://developers.miro.com/reference/enterprise-get-organization-members
+Get organization memberget,https://developers.miro.com/reference/enterprise-get-organization-member
+Teams,https://developers.miro.com/reference/enterprise-create-team
+Create teampost,https://developers.miro.com/reference/enterprise-create-team
+List teamsget,https://developers.miro.com/reference/enterprise-get-teams
+Get teamget,https://developers.miro.com/reference/enterprise-get-team
+Update teampatch,https://developers.miro.com/reference/enterprise-update-team
+Delete teamdelete,https://developers.miro.com/reference/enterprise-delete-team
+Team Settings,https://developers.miro.com/reference/enterprise-get-default-team-settings
+Get default team settingsget,https://developers.miro.com/reference/enterprise-get-default-team-settings
+Get team settingsget,https://developers.miro.com/reference/enterprise-get-team-settings
+Update team settingspatch,https://developers.miro.com/reference/enterprise-update-team-settings
+Team Members,https://developers.miro.com/reference/enterprise-invite-team-member
+Invite team memberspost,https://developers.miro.com/reference/enterprise-invite-team-member
+List team membersget,https://developers.miro.com/reference/enterprise-get-team-members
+Get team memberget,https://developers.miro.com/reference/enterprise-get-team-member
+Update team memberpatch,https://developers.miro.com/reference/enterprise-update-team-member
+Delete team member from teamdelete,https://developers.miro.com/reference/enterprise-delete-team-member
+Reset all sessions of a user,https://developers.miro.com/reference/enterprise-post-user-sessions-reset
+Reset all sessions of a userpost,https://developers.miro.com/reference/enterprise-post-user-sessions-reset
+Board classification: Organization level,https://developers.miro.com/reference/enterprise-dataclassification-organization-settings-get
+Get organization settingsget,https://developers.miro.com/reference/enterprise-dataclassification-organization-settings-get
+Board classification: Team level,https://developers.miro.com/reference/enterprise-dataclassification-team-boards-bulk
+Bulk update boards classificationpatch,https://developers.miro.com/reference/enterprise-dataclassification-team-boards-bulk
+Get team settingsget,https://developers.miro.com/reference/enterprise-dataclassification-team-settings-get
+Update team settingspatch,https://developers.miro.com/reference/enterprise-dataclassification-team-settings-set
+Board classification: Board level,https://developers.miro.com/reference/enterprise-dataclassification-board-get
+Get board classificationget,https://developers.miro.com/reference/enterprise-dataclassification-board-get
+Update board classificationpost,https://developers.miro.com/reference/enterprise-dataclassification-board-set
+Audit Logs,https://developers.miro.com/reference/audit-logs
+Get audit logsget,https://developers.miro.com/reference/enterprise-get-audit-logs
+Board Export,https://developers.miro.com/reference/board-export
+Create board export jobpost,https://developers.miro.com/reference/enterprise-create-board-export
+Get board export job statusget,https://developers.miro.com/reference/enterprise-board-export-job-status
+Get results for board export jobget,https://developers.miro.com/reference/enterprise-board-export-job-results
+Board Content Logs,https://developers.miro.com/reference/board-content-logs
+Retrieve content change logs of board itemsget,https://developers.miro.com/reference/enterprise-board-content-item-logs-fetch
+Legal holds,https://developers.miro.com/reference/legal-hold
+Get all casesget,https://developers.miro.com/reference/get-all-cases
+Get caseget,https://developers.miro.com/reference/get-case
+Get all legal holds within a caseget,https://developers.miro.com/reference/get-all-legal-holds
+Get legal hold informationget,https://developers.miro.com/reference/get-legal-hold
+Get content items under legal holdget,https://developers.miro.com/reference/get-legal-hold-content-items
+scopes,https://developers.miro.com/reference/scopes
+Create authorization request link,https://developers.miro.com/reference/create-authorization-request-link
+Request user for authorization,https://developers.miro.com/reference/request-user-for-authorization
+Exchange authorization code with access token,https://developers.miro.com/reference/exchange-authorization-code-with-access-token
+Use access token for REST API requests,https://developers.miro.com/reference/use-access-token-for-rest-api-requests
+expiring access tokens,https://developers.miro.com/reference/authorization-flow-for-expiring-access-tokens
+Get new access token using refresh token,https://developers.miro.com/reference/get-new-access-token-using-refresh-token
+Get access token context,https://developers.miro.com/reference/get-non-expired-access-token-context
+Revoke token,https://developers.miro.com/reference/revoke-token
+an expiring access token,https://developers.miro.com/reference/authorization-flow-for-expiring-tokens
+authorization flow for expiring tokens,https://developers.miro.com/reference/authorization-flow-for-expiring-tokens
+authorization flow for non-expiring access tokens,https://developers.miro.com/reference/authorization-flow-for-expiring-access-tokens
+Table of Contents,https://developers.miro.com/reference/overview#
+Prerequisites,https://developers.miro.com/reference/overview#prerequisites
+OAuth authorization code flow,https://developers.miro.com/reference/overview#oauth-authorization-code-flow
+Use an expiring access token,https://developers.miro.com/reference/overview#use-an-expiring-access-token
+Use a non-expiring access token,https://developers.miro.com/reference/overview#use-a-non-expiring-access-token
+App metrics (experimental),https://developers.miro.com/reference/app-metrics-experimental-1
+Webhooks (experimental),https://developers.miro.com/reference/webhooks-experimental
+Mind map nodes (experimental),https://developers.miro.com/reference/mind-map-nodes-experimental
+Flowchart shapes (experimental),https://developers.miro.com/reference/flowchart-shapes-experimental
+Projects,https://developers.miro.com/reference/projects
+Project Settings,https://developers.miro.com/reference/project-settings
+Project Members,https://developers.miro.com/reference/project-members
+Organizations,https://developers.miro.com/reference/organizations
+Organization Members,https://developers.miro.com/reference/organization-members
+Teams,https://developers.miro.com/reference/teams
+Team Settings,https://developers.miro.com/reference/team-settings
+Team Members,https://developers.miro.com/reference/team-members
+Reset all sessions of a user,https://developers.miro.com/reference/reset-all-sessions-of-a-user
+Board classification: Organization level,https://developers.miro.com/reference/board-classification-organization-level
+Board classification: Team level,https://developers.miro.com/reference/board-classification-team-level
+Board classification: Board level,https://developers.miro.com/reference/board-classification-board-level
+
+
+_____
+# How to add iFrames
+It's not possible to set data.html in the request. This field is returned in the response as read-only.
+
+The embed item is rendered on the board inside an iframe.
+
+Below you can find examples of payload body, cURL request and corresponding response.
+
+In the request, replace the <BOARD-ID> and <ACCESS-TOKEN> placeholders with actual, valid values for board ID and app access token.
+The app the access token refers to must be running when you send the request.
+If the embed has fixed aspect ratio, you can pass either width,  or height, but not both at the same time.
+The missing dimension in the request is calculated automatically to keep the aspect ratio of the embed.
+The payload example below includes all the fields you can pass, except from height.
+In the payload body, data.url is the only required field.
+Payload body example
+
+{
+  "data": {
+    "url": "https://www.youtube.com/watch?v=ifDJgNlg3sc",
+    "mode": "modal",
+    "previewUrl": "https://images.rawpixel.com/image_1300/czNmcy1wcml2YXRlL3Jhd3BpeGVsX2ltYWdlcy93ZWJzaXRlX2NvbnRlbnQvbHIvcm0zOTEtYmxvZ2Jhbm5lci0wMS5qcGc.jpg"
+  },
+  "position": {
+    "x": 3
+    "y": -400,
+    "origin": "center"
+  },
+  "geometry": {
+    "width": 800
+  }
+}
+
+CURL request
+
+curl --request POST \
+     --url https://api.miro.com/v2/boards/<BOARD-ID>/embeds \
+     --header 'Accept: application/json' \
+     --header 'Authorization: Bearer <ACCESS-TOKEN>' \
+     --header 'Content-Type: application/json' \
+     --data '
+{
+     "data": {
+          "url": "https://www.youtube.com/watch?v=ifDJgNlg3sc",
+          "mode": "modal",
+          "previewUrl": "https://images.rawpixel.com/image_1300/czNmcy1wcml2YXRlL3Jhd3BpeGVsX2ltYWdlcy93ZWJzaXRlX2NvbnRlbnQvbHIvcm0zOTEtYmxvZ2Jhbm5lci0wMS5qcGc.jpg"
+     },
+     "position": {
+          "origin": "center",
+          "x": 3700,
+          "y": -300
+     },
+     "geometry": {
+          "width": 800
+     }
+}'
+ 
+
+JSON response
+
+In the response, data.mode and data.url are set as per corresponding REST API request.
+All other data.* fields in the response data object are fetched from the resource provider (in this case: YouTube), and are read-only.
+
+{
+  "id": "3458764532406641234",
+  "type": "embed",
+  "links": {
+    "self": "https://api.miro.com/v2/boards/<BOARD-ID>/embeds/3458764532406641234"
+  },
+  "createdAt": "2022-09-01T13:28:47Z",
+  "createdBy": {
+    "id": "3074457356556534321",
+    "type": "user"
+  },
+  "data": {
+    "contentType": "video",
+    "description": "Faster Hands &amp; Feet (in 10 days) ► https://www.Drumeo.com/faster/ The Ultimate Drumming Toolbox ►https://www.drumeo.com/ultimate-toolbox/ What&#39;s better than one awesome drummer? Two awesome drummers! Check out this drum duet featuring Senri Kawaguchi and Sarah Thawer playing the funky track &#34;Real Life&#34; (by Senri Kawaguchi). They trade solos mid-video before transitioning into a heavier version of the song.",
+    "html": "<iframe class=\"embedly-embed\" src=\"//cdn.embedly.com/widgets/media.html?src=https%3A%2F%2Fwww.youtube.com%2Fembed%2FifDJgNlg3sc%3Ffeature%3Doembed&display_name=YouTube&url=https%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3DifDJgNlg3sc&image=https%3A%2F%2Fi.ytimg.com%2Fvi%2FifDJgNlg3sc%2Fhqdefault.jpg&key=982f25f1832140d79e2af93ff42af70c&type=text%2Fhtml&schema=youtube\" width=\"854\" height=\"480\" scrolling=\"no\" title=\"YouTube embed\" frameborder=\"0\" allow=\"autoplay; fullscreen\" allowfullscreen=\"true\"></iframe>",
+    "mode": "modal",
+    "providerName": "YouTube",
+    "providerUrl": "https://www.youtube.com/",
+    "title": "Senri Kawaguchi &amp; Sarah Thawer Drum-Off",
+    "url": "https://www.youtube.com/watch?v=ifDJgNlg3sc"
+  },
+  "geometry": {
+    "width": 800,
+    "height": 449.84615384615387
+  },
+  "modifiedAt": "2022-09-01T13:28:47Z",
+  "modifiedBy": {
+    "id": "3074457356556534321",
+    "type": "user"
+  },
+  "position": {
+    "x": 3700,
+    "y": -300,
+    "origin": "center",
+    "relativeTo": "canvas_center"
+  }
+}
