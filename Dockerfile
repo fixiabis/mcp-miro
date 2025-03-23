@@ -1,8 +1,8 @@
-FROM node:18-alpine
+FROM node:18-slim
 
 WORKDIR /app
 
-# Copy package.json and package-lock.json
+# Copy package files
 COPY package*.json ./
 
 # Install dependencies
@@ -11,12 +11,11 @@ RUN npm ci
 # Copy source code
 COPY . .
 
-# Build the application
+# Build the project
 RUN npm run build
 
-# Set executable permissions for the entry point
+# Make the script executable
 RUN chmod +x build/index.js
 
-# The binary expects token to be passed as argument or env var
-# Smithery will handle passing the token via the smithery.yaml config
-CMD ["node", "build/index.js"] 
+# The command will be provided by smithery.yaml
+ENTRYPOINT ["node"] 

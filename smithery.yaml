@@ -12,7 +12,7 @@ startCommand:
     function(config) {
       return {
         command: "node",
-        args: ["build/index.js", "--token", config.miroToken],
+        args: ["build/index.js"],
         env: {
           "NODE_ENV": "production",
           "MIRO_OAUTH_TOKEN": config.miroToken
