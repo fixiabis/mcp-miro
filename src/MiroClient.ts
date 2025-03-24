@@ -246,27 +246,26 @@ export class MiroClient {
   /**
    * Creates an embed (iframe) on a Miro board
    * @param boardId The ID of the board to create the embed on
-   * @param url The URL to embed
+   * @param data The embed data
    * @param position Optional position information for the embed
    * @param geometry Optional geometry information for the embed
-   * @param mode Optional display mode for the embed ('inline' or 'modal')
-   * @param previewUrl Optional URL for a preview image
    * @returns The created embed item
    */
   async createEmbed(
     boardId: string,
-    url: string,
+    data: { url: string; mode?: string; previewUrl?: string },
     position?: MiroPosition,
     geometry?: MiroGeometry
   ): Promise<MiroItem> {
-    return this.fetchApi(`/boards/${boardId}/embeds`, {
+    const response = await this.fetchApi(`/boards/${boardId}/embeds`, {
       method: 'POST',
       body: {
-        data: { url },
-        position: position || undefined,
-        geometry: geometry || undefined
+        data,
+        position,
+        geometry
       }
-    }) as Promise<MiroItem>;
+    });
+    return response as MiroItem;
   }
 
   /**

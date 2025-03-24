@@ -6,7 +6,7 @@ import { MiroClient } from "../MiroClient.js";
 export const imageToolDefinitions = [
   {
     name: "create_image",
-    description: "Create an image on a Miro board from either a URL or base64 data. When using base64, the data must follow MCP image content type format.",
+    description: "Create an image on a Miro board from either a URL or base64 data. When using base64, the data must follow MCP image content type format. For images with fixed aspect ratio, specify either width OR height, not both.",
     inputSchema: {
       type: "object",
       properties: {
@@ -35,11 +35,11 @@ export const imageToolDefinitions = [
         },
         width: {
           type: "number",
-          description: "Width of the image in pixels (optional)",
+          description: "Width of the image in pixels (optional, don't specify both width and height for fixed aspect ratio images)",
         },
         height: {
           type: "number",
-          description: "Height of the image in pixels (optional)",
+          description: "Height of the image in pixels (optional, don't specify both width and height for fixed aspect ratio images)",
         },
         origin: {
           type: "string",
@@ -85,10 +85,13 @@ export const handleImageTools = async (toolName: string, args: any, miroClient: 
     case "create_image": {
       const { boardId, imageData, isUrl = true, x = 0, y = 0, width, height, origin = "center" } = args;
       
-      // Build geometry object if width or height is provided
-      const geometry: { width?: number; height?: number } = {};
-      if (width !== undefined) geometry.width = width;
-      if (height !== undefined) geometry.height = height;
+      // For geometry, only pass width OR height, not both
+      let geometry: { width?: number; height?: number } | undefined;
+      if (width !== undefined) {
+        geometry = { width };
+      } else if (height !== undefined) {
+        geometry = { height };
+      }
 
       let image;
       if (isUrl) {
@@ -96,7 +99,7 @@ export const handleImageTools = async (toolName: string, args: any, miroClient: 
           boardId,
           imageData,
           { x, y, origin },
-          Object.keys(geometry).length > 0 ? geometry : undefined
+          geometry
         );
       } else {
         // Validate base64 data format according to MCP standards
@@ -108,7 +111,7 @@ export const handleImageTools = async (toolName: string, args: any, miroClient: 
           boardId,
           imageData,
           { x, y, origin },
-          Object.keys(geometry).length > 0 ? geometry : undefined
+          geometry
         );
       }
 
@@ -124,28 +127,17 @@ export const handleImageTools = async (toolName: string, args: any, miroClient: 
             text: `Created image with ID ${image.id} on board ${boardId}`,
           },
           {
-            type: "image",
-            data: {
-              url: image.data?.imageUrl,
-              width: image.geometry?.width,
-              height: image.geometry?.height,
-              requiresAuth: true,
-              miroId: image.id,
-              format: "image/png", // Add format according to MCP standards
-              title: `Miro Image ${image.id}` // Add title according to MCP standards
-            }
-          },
-          {
-            type: "json",
-            data: {
+            type: "text",
+            text: JSON.stringify({
               miroImageId: image.id,
               boardId: boardId,
               imageUrl: image.data?.imageUrl,
               dimensions: {
                 width: image.geometry?.width,
                 height: image.geometry?.height
-              }
-            }
+              },
+              requiresAuth: true
+            }, null, 2)
           }
         ],
       };
@@ -166,6 +158,16 @@ export const handleImageTools = async (toolName: string, args: any, miroClient: 
           `${image.data.imageUrl}?format=original` : 
           image.data?.imageUrl;
 
+        if (!imageUrl) {
+          throw new Error('No image URL available');
+        }
+
+        // Fetch the image and convert to base64
+        const response = await fetch(imageUrl);
+        const arrayBuffer = await response.arrayBuffer();
+        const base64 = Buffer.from(arrayBuffer).toString('base64');
+        const contentType = response.headers.get('content-type') || 'image/png';
+
         // Return in MCP-compliant format
         return {
           content: [
@@ -175,15 +177,18 @@ export const handleImageTools = async (toolName: string, args: any, miroClient: 
             },
             {
               type: "image",
-              data: {
-                url: imageUrl,
-                width: image.geometry?.width,
-                height: image.geometry?.height,
-                requiresAuth: true,
-                miroId: image.id,
-                format: "image/png", // Add format according to MCP standards
-                title: `Miro Image ${image.id}` // Add title according to MCP standards
-              }
+              data: `data:${contentType};base64,${base64}`,
+              mimeType: contentType
+            },
+            {
+              type: "text",
+              text: JSON.stringify({
+                miroImageId: image.id,
+                dimensions: {
+                  width: image.geometry?.width,
+                  height: image.geometry?.height
+                }
+              }, null, 2)
             }
           ],
         };

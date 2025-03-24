@@ -1,7 +1,6 @@
 import { MiroClient } from "../MiroClient.js";
 import { imageToolDefinitions, handleImageTools } from "./imageTools.js";
 import { embedToolDefinitions, handleEmbedTools } from "./embedTools.js";
-import { screenshotToolDefinitions, handleScreenshotTools } from "./screenshotTools.js";
 import { shapeToolDefinitions, handleShapeTools } from "./shapeTools.js";
 import { spatialToolDefinitions, handleSpatialTools } from "./spatialTools.js";
 import { boardToolDefinitions, handleBoardTools } from "./boardTools.js";
@@ -11,7 +10,6 @@ import { contentToolDefinitions, handleContentTools } from "./contentTools.js";
 export {
   imageToolDefinitions, handleImageTools,
   embedToolDefinitions, handleEmbedTools,
-  screenshotToolDefinitions, handleScreenshotTools,
   shapeToolDefinitions, handleShapeTools,
   spatialToolDefinitions, handleSpatialTools,
   boardToolDefinitions, handleBoardTools,
@@ -27,7 +25,6 @@ export function getAllToolDefinitions() {
     ...contentToolDefinitions,
     ...imageToolDefinitions,
     ...embedToolDefinitions,
-    ...screenshotToolDefinitions,
     ...shapeToolDefinitions,
     ...spatialToolDefinitions
   ];
@@ -64,11 +61,6 @@ export async function handleToolRequest(toolName: string, args: any, miroClient:
     return handleEmbedTools(toolName, args, miroClient);
   }
   
-  // Screenshot tools
-  if (toolName === 'export_board_as_json') {
-    return handleScreenshotTools(toolName, args, miroClient);
-  }
-  
   // Shape tools
   if (toolName === 'get_shape_details' || toolName === 'get_shapes_by_type') {
     return handleShapeTools(toolName, args, miroClient);
@@ -80,4 +72,9 @@ export async function handleToolRequest(toolName: string, args: any, miroClient:
   }
   
   throw new Error(`Unknown tool: ${toolName}`);
-} 
+}
+
+export * from './imageTools.js';
+export * from './embedTools.js';
+export * from './shapeTools.js';
+export * from './spatialTools.js'; 

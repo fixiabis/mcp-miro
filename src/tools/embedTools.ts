@@ -79,38 +79,60 @@ export const embedToolDefinitions = [
 export const handleEmbedTools = async (toolName: string, args: any, miroClient: MiroClient) => {
   switch (toolName) {
     case "create_embed": {
-      const { boardId, url, x = 0, y = 0, width, height, mode = "inline", previewUrl, origin = "center" } = args;
+      let { boardId, url, x = 0, y = 0, width = 800, height, mode = "inline", previewUrl, origin = "center" } = args;
       
-      // Build geometry object if width or height is provided
-      const geometry: { width?: number; height?: number } = {};
-      if (width !== undefined) geometry.width = width;
-      if (height !== undefined) geometry.height = height;
-
-      // Validate that both width and height aren't provided for fixed aspect ratio content
-      if (width !== undefined && height !== undefined) {
-        console.warn("For fixed aspect ratio content, you should specify either width OR height, but not both. Using both values as provided.");
+      // For Speckle URLs, ensure we have the embed parameter
+      if (url.includes('speckle.systems') && !url.includes('#embed=')) {
+        url = `${url}#embed={"isEnabled":true}`;
       }
 
+      // Build geometry object - for fixed aspect ratio content, only specify one dimension
+      let geometry: { width?: number; height?: number } | undefined = undefined;
+      if (width !== undefined || height !== undefined) {
+        geometry = {};
+        // Prefer width if both are specified
+        if (width !== undefined) {
+          geometry.width = width;
+        } else if (height !== undefined) {
+          geometry.height = height;
+        }
+      }
+
+      // Prepare embed data
+      const embedData = {
+        url,
+        mode,
+        ...(previewUrl ? { previewUrl } : {})
+      };
+
+      console.log('Creating embed with:', JSON.stringify({
+        data: embedData,
+        position: { x, y, origin },
+        geometry
+      }, null, 2));
+
+      // Create the embed
       const embed = await miroClient.createEmbed(
         boardId,
-        url,
+        embedData,
         { x, y, origin },
-        Object.keys(geometry).length > 0 ? geometry : undefined
+        geometry
       );
 
+      // Return response with embed details
       return {
         content: [
           {
             type: "text",
-            text: `Created embed with ID ${embed.id} on board ${boardId}`,
-          },
-          {
-            type: "text",
-            text: `Embed dimensions: ${embed.geometry?.width || 'auto'} x ${embed.geometry?.height || 'auto'}`,
-          },
-          {
-            type: "text",
-            text: `Provider: ${embed.data?.providerName || 'Unknown'}`,
+            text: JSON.stringify({
+              id: embed.id,
+              boardId: boardId,
+              url: url,
+              mode: embed.data?.mode || mode,
+              dimensions: embed.geometry || 'auto',
+              provider: embed.data?.providerName || 'Unknown',
+              title: embed.data?.title || null
+            }, null, 2)
           }
         ],
       };
