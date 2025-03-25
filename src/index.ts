@@ -551,16 +551,26 @@ server.setRequestHandler(GetPromptRequestSchema, async (request) => {
 
 async function main() {
   const transport = new StdioServerTransport();
-  await server.connect(transport);
+  
+  console.error('Starting server initialization...');
+  
+  try {
+    await server.connect(transport);
+    console.error('Server connected successfully');
+    
+    // Keep the process alive
+    process.stdin.resume();
+    
+  } catch (error) {
+    console.error('Failed to initialize server:', error);
+    process.exit(1);
+  }
 }
 
 main().catch((error) => {
   console.error("Server error:", error);
   process.exit(1);
 });
-
-// Keep the process alive
-process.stdin.resume();
 
 // Error handling for uncaught exceptions
 process.on('uncaughtException', (error) => {
