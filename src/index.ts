@@ -558,3 +558,15 @@ main().catch((error) => {
   console.error("Server error:", error);
   process.exit(1);
 });
+
+// Keep the process alive
+process.stdin.resume();
+
+// Error handling for uncaught exceptions
+process.on('uncaughtException', (error) => {
+  console.error('Uncaught Exception:', error);
+});
+
+process.on('unhandledRejection', (reason, promise) => {
+  console.error('Unhandled Rejection at:', promise, 'reason:', reason);
+});
