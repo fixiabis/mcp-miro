@@ -39,35 +39,32 @@ export function getAllToolDefinitions() {
  */
 export async function handleToolRequest(toolName: string, args: any, miroClient: MiroClient) {
   // Board tools
-  if (toolName === 'list_boards' || 
-      toolName === 'get_frames' ||
-      toolName === 'get_items_in_frame') {
+  if (boardToolDefinitions.some(tool => tool.name === toolName)) {
     return handleBoardTools(toolName, args, miroClient);
   }
   
   // Content creation tools
-  if (toolName === 'create_sticky_note' || 
-      toolName === 'bulk_create_items') {
+  if (contentToolDefinitions.some(tool => tool.name === toolName)) {
     return handleContentTools(toolName, args, miroClient);
   }
   
   // Image tools
-  if (toolName === 'create_image' || toolName === 'get_image') {
+  if (imageToolDefinitions.some(tool => tool.name === toolName)) {
     return handleImageTools(toolName, args, miroClient);
   }
   
   // Embed tools
-  if (toolName.startsWith('create_embed')) {
+  if (embedToolDefinitions.some(tool => tool.name === toolName)) {
     return handleEmbedTools(toolName, args, miroClient);
   }
   
   // Shape tools
-  if (toolName === 'get_shape_details' || toolName === 'get_shapes_by_type') {
+  if (shapeToolDefinitions.some(tool => tool.name === toolName)) {
     return handleShapeTools(toolName, args, miroClient);
   }
   
   // Spatial tools
-  if (toolName === 'get_frame_spatial_map') {
+  if (spatialToolDefinitions.some(tool => tool.name === toolName)) {
     return handleSpatialTools(toolName, args, miroClient);
   }
   
